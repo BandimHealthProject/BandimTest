@@ -22,7 +22,7 @@
           "title": {
             "text": {
               "english": "Bandim Test App",
-              "default": "Bandim Test App"
+              "default": "App de Teste Bandim"
             }
           }
         },
@@ -56,10 +56,6 @@
         "setting_name": "font-size",
         "value": "20pt",
         "_row_num": 8
-      },
-      {
-        "setting_name": "instance_name",
-        "_row_num": 9
       }
     ],
     "survey": [
@@ -72,8 +68,8 @@
         "display": {
           "prompt": {
             "text": {
-              "english": "This is just a test",
-              "default": "This is just a test"
+              "english": "This is the note prompt type. It is used for writing notes.",
+              "default": "This is the note prompt type. It is used for writing notes."
             }
           }
         },
@@ -81,6 +77,631 @@
       },
       {
         "clause": "end screen",
+        "_row_num": 4
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 5
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "This screen is an example of the text and integer prompt type. <br />\nText allows the user to input text. <br />\nInteger allows the user to input an integer.",
+              "default": "This screen is an example of the text and integer prompt type. <br />\nText allows the user to input text. <br />\nInteger allows the user to input an integer."
+            }
+          }
+        },
+        "_row_num": 6
+      },
+      {
+        "type": "text",
+        "name": "NAME",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "What is your name?",
+              "default": "What is your name?"
+            }
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "type": "integer",
+        "name": "AGE",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "How old are you?",
+              "default": "How old are you?"
+            }
+          },
+          "constraint_message": {
+            "text": {
+              "english": "Age has to between 1-100:",
+              "default": "Age has to between 1-100:"
+            }
+          }
+        },
+        "constraint": "(data(\"AGE\")>0 && data(\"AGE\")<=100) || data(\"AGE\") == 999",
+        "_row_num": 8
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 9
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 10
+      },
+      {
+        "clause": "if",
+        "condition": "data(\"AGE\")==999",
+        "_row_num": 11
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "The assign prompt is used to assign values to variables. <br />\nHere the DOB value has been assgin NS values, since age is 999. <br />\nDOB: {{data.DOB}}",
+              "default": "The assign prompt is used to assign values to variables. <br />\nHere the DOB value has been assgin NS values, since age is 999. <br />\nDOB: {{data.DOB}}"
+            }
+          }
+        },
+        "_row_num": 12
+      },
+      {
+        "type": "assign",
+        "name": "DOB",
+        "calculation": "\"D:NS,M:NS,Y:NS\"",
+        "_row_num": 13
+      },
+      {
+        "clause": "else",
+        "_row_num": 14
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "The adate promt is a custom Bandim prompt that allows for NS values in dates. <br />\nYour age: {{data.AGE}}.",
+              "default": "The adate promt is a custom Bandim prompt that allows for NS values in dates. <br />\nYour age: {{data.AGE}}."
+            }
+          }
+        },
+        "_row_num": 15
+      },
+      {
+        "type": "adate",
+        "name": "DOB",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "What day is your birthday?",
+              "default": "What day is your birthday?"
+            }
+          }
+        },
+        "_row_num": 16
+      },
+      {
+        "clause": "end if",
+        "_row_num": 17
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 18
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 19
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "Today: {{data.TODAY}} <br />\nToday  (converted): {{calculates.displayTODAY}}",
+              "default": "Today: {{data.TODAY}} <br />\nToday  (converted): {{calculates.displayTODAY}}"
+            }
+          }
+        },
+        "_row_num": 20
+      },
+      {
+        "type": "assign",
+        "name": "TODAY",
+        "calculation": "adate.today()",
+        "_row_num": 21
+      },
+      {
+        "clause": "if",
+        "condition": "adate.hasUncertainty(data(\"DOB\"))",
+        "_row_num": 22
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "There is a NS value in DOB: {{calculates.displayDOB}}.",
+              "default": "There is a NS value in DOB: {{calculates.displayDOB}}."
+            }
+          }
+        },
+        "_row_num": 23
+      },
+      {
+        "clause": "else",
+        "_row_num": 24
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "There is not a NS value in DOB: {{calculates.displayDOB}}.",
+              "default": "There is not a NS value in DOB: {{calculates.displayDOB}}."
+            }
+          }
+        },
+        "_row_num": 25
+      },
+      {
+        "clause": "end if",
+        "_row_num": 26
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "There are {{calculates.diffInDays}} days between your birthday and today.",
+              "default": "There are {{calculates.diffInDays}} days between your birthday and today."
+            }
+          }
+        },
+        "_row_num": 27
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 28
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 29
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "The small calculations under an adate prompt can be removed.",
+              "default": "The small calculations under an adate prompt can be removed."
+            }
+          }
+        },
+        "_row_num": 30
+      },
+      {
+        "type": "adate",
+        "name": "DATE1",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "With calculations",
+              "default": "With calculations"
+            }
+          }
+        },
+        "_row_num": 31
+      },
+      {
+        "type": "adate",
+        "name": "DATE2",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "Without calculations",
+              "default": "Without calculations"
+            }
+          },
+          "adate": {
+            "helperText": false
+          }
+        },
+        "_row_num": 32
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 33
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 34
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "The selcet_one prompt is used for multiple choice questions.",
+              "default": "The selcet_one prompt is used for multiple choice questions."
+            }
+          }
+        },
+        "_row_num": 35
+      },
+      {
+        "type": "select_one",
+        "values_list": "yesYES",
+        "name": "BEST",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "Is this the best test app you have ever seen?",
+              "default": "Is this the best test app you have ever seen?"
+            }
+          }
+        },
+        "_row_num": 36
+      },
+      {
+        "clause": "if",
+        "condition": "data(\"BEST\")==2",
+        "_row_num": 37
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "Thank you!",
+              "default": "Thank you!"
+            }
+          }
+        },
+        "_row_num": 38
+      },
+      {
+        "clause": "end if",
+        "_row_num": 39
+      },
+      {
+        "type": "select_one_dropdown",
+        "values_list": "region",
+        "name": "REG",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "What region do you like the best?",
+              "default": "What region do you like the best?"
+            }
+          }
+        },
+        "_row_num": 40
+      },
+      {
+        "type": "select_one_with_other",
+        "values_list": "pizza",
+        "name": "PIZZA",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "Where do you get the best pizza?",
+              "default": "Where do you get the best pizza?"
+            }
+          }
+        },
+        "_row_num": 41
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 42
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 43
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "The select_multiple prompt is used for multiple answers questions.",
+              "default": "The select_multiple prompt is used for multiple answers questions."
+            }
+          }
+        },
+        "_row_num": 44
+      },
+      {
+        "type": "select_multiple",
+        "values_list": "region",
+        "name": "REGVIS",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "Which regions have you visited?",
+              "default": "Which regions have you visited?"
+            }
+          }
+        },
+        "_row_num": 45
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 46
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 47
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "The image prompt is used to take pictures.",
+              "default": "The image prompt is used to take pictures."
+            }
+          }
+        },
+        "_row_num": 48
+      },
+      {
+        "type": "image",
+        "name": "IMG",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "Please take a photo of something.",
+              "default": "Please take a photo of something."
+            }
+          }
+        },
+        "_row_num": 49
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 50
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 51
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "english": "It is <b> possible </b> to <i> costomize </i> your texts by using <font color = \"red\"> HTML </font>!",
+              "default": "It is <b> possible </b> to <i> costomize </i> your texts by using <font color = \"red\"> HTML </font>!"
+            }
+          }
+        },
+        "_row_num": 52
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 53
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "yesYES",
+        "data_value": "1",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Yes",
+              "default": "Yes"
+            }
+          }
+        },
+        "_row_num": 2
+      },
+      {
+        "choice_list_name": "yesYES",
+        "data_value": "2",
+        "display": {
+          "title": {
+            "text": {
+              "english": "YES!!",
+              "default": "YES!!"
+            }
+          }
+        },
+        "_row_num": 3
+      },
+      {
+        "choice_list_name": "region",
+        "data_value": "1",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Oio",
+              "default": "Oio"
+            }
+          }
+        },
+        "_row_num": 4
+      },
+      {
+        "choice_list_name": "region",
+        "data_value": "2",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Biombo",
+              "default": "Biombo"
+            }
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "choice_list_name": "region",
+        "data_value": "5",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Gabu",
+              "default": "Gabu"
+            }
+          }
+        },
+        "_row_num": 6
+      },
+      {
+        "choice_list_name": "region",
+        "data_value": "7",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Cacheu",
+              "default": "Cacheu"
+            }
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "choice_list_name": "region",
+        "data_value": "8",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Bafata",
+              "default": "Bafata"
+            }
+          }
+        },
+        "_row_num": 8
+      },
+      {
+        "choice_list_name": "region",
+        "data_value": "11",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Quinara",
+              "default": "Quinara"
+            }
+          }
+        },
+        "_row_num": 9
+      },
+      {
+        "choice_list_name": "region",
+        "data_value": "12",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Tombali",
+              "default": "Tombali"
+            }
+          }
+        },
+        "_row_num": 10
+      },
+      {
+        "choice_list_name": "region",
+        "data_value": "13",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Bubaque",
+              "default": "Bubaque"
+            }
+          }
+        },
+        "_row_num": 11
+      },
+      {
+        "choice_list_name": "region",
+        "data_value": "14",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Bolama",
+              "default": "Bolama"
+            }
+          }
+        },
+        "_row_num": 12
+      },
+      {
+        "choice_list_name": "region",
+        "data_value": "15",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Sao Domingos",
+              "default": "Sao Domingos"
+            }
+          }
+        },
+        "_row_num": 13
+      },
+      {
+        "choice_list_name": "region",
+        "data_value": "16",
+        "display": {
+          "title": {
+            "text": {
+              "english": "MSF Bafata",
+              "default": "MSF Bafata"
+            }
+          }
+        },
+        "_row_num": 14
+      },
+      {
+        "choice_list_name": "pizza",
+        "data_value": "Bis",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Bistro",
+              "default": "Bistro"
+            }
+          }
+        },
+        "_row_num": 15
+      },
+      {
+        "choice_list_name": "pizza",
+        "data_value": "Ins",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Insonias",
+              "default": "Insonias"
+            }
+          }
+        },
+        "_row_num": 16
+      }
+    ],
+    "calculates": [
+      {
+        "calculation_name": "displayTODAY",
+        "calculation": "adate.display(data(\"TODAY\"))",
+        "_row_num": 2
+      },
+      {
+        "calculation_name": "displayDOB",
+        "calculation": "adate.display(data(\"DOB\"))",
+        "_row_num": 3
+      },
+      {
+        "calculation_name": "diffInDays",
+        "calculation": "adate.diffInDays(data(\"DOB\"),data(\"TODAY\"))",
         "_row_num": 4
       }
     ],
@@ -91,6 +712,74 @@
         "elementType": "string",
         "comment": "Save only mm.dd.yyyy with support for ?? at all positions",
         "_row_num": 2
+      }
+    ],
+    "model": [
+      {
+        "name": "AGE",
+        "type": "integer",
+        "isSessionVariable": false,
+        "_row_num": 2
+      },
+      {
+        "name": "BEST",
+        "type": "select_one",
+        "isSessionVariable": false,
+        "_row_num": 3
+      },
+      {
+        "name": "DATE1",
+        "type": "adate",
+        "isSessionVariable": false,
+        "_row_num": 4
+      },
+      {
+        "name": "DATE2",
+        "type": "adate",
+        "isSessionVariable": false,
+        "_row_num": 5
+      },
+      {
+        "name": "DOB",
+        "type": "adate",
+        "isSessionVariable": false,
+        "_row_num": 6
+      },
+      {
+        "name": "IMG",
+        "type": "image",
+        "isSessionVariable": false,
+        "_row_num": 7
+      },
+      {
+        "name": "NAME",
+        "type": "text",
+        "isSessionVariable": false,
+        "_row_num": 8
+      },
+      {
+        "name": "PIZZA",
+        "type": "select_one_with_other",
+        "isSessionVariable": false,
+        "_row_num": 9
+      },
+      {
+        "name": "REG",
+        "type": "select_one_dropdown",
+        "isSessionVariable": false,
+        "_row_num": 10
+      },
+      {
+        "name": "REGVIS",
+        "type": "select_multiple",
+        "isSessionVariable": false,
+        "_row_num": 11
+      },
+      {
+        "name": "TODAY",
+        "type": "adate",
+        "isSessionVariable": false,
+        "_row_num": 12
       }
     ]
   },
@@ -132,7 +821,7 @@
           "title": {
             "text": {
               "english": "Bandim Test App",
-              "default": "Bandim Test App"
+              "default": "App de Teste Bandim"
             }
           }
         },
@@ -166,10 +855,6 @@
         "setting_name": "font-size",
         "value": "20pt",
         "_row_num": 8
-      },
-      "instance_name": {
-        "setting_name": "instance_name",
-        "_row_num": 9
       },
       "_locales": {
         "setting_name": "_locales",
@@ -212,20 +897,442 @@
           "title": {
             "text": {
               "english": "Bandim Test App",
-              "default": "Bandim Test App"
+              "default": "App de Teste Bandim"
             }
           }
         },
         "_row_num": 5
       }
     },
-    "choices": {},
+    "choices": {
+      "yesYES": [
+        {
+          "choice_list_name": "yesYES",
+          "data_value": "1",
+          "display": {
+            "title": {
+              "text": {
+                "english": "Yes",
+                "default": "Yes"
+              }
+            }
+          },
+          "_row_num": 2
+        },
+        {
+          "choice_list_name": "yesYES",
+          "data_value": "2",
+          "display": {
+            "title": {
+              "text": {
+                "english": "YES!!",
+                "default": "YES!!"
+              }
+            }
+          },
+          "_row_num": 3
+        }
+      ],
+      "region": [
+        {
+          "choice_list_name": "region",
+          "data_value": "1",
+          "display": {
+            "title": {
+              "text": {
+                "english": "Oio",
+                "default": "Oio"
+              }
+            }
+          },
+          "_row_num": 4
+        },
+        {
+          "choice_list_name": "region",
+          "data_value": "2",
+          "display": {
+            "title": {
+              "text": {
+                "english": "Biombo",
+                "default": "Biombo"
+              }
+            }
+          },
+          "_row_num": 5
+        },
+        {
+          "choice_list_name": "region",
+          "data_value": "5",
+          "display": {
+            "title": {
+              "text": {
+                "english": "Gabu",
+                "default": "Gabu"
+              }
+            }
+          },
+          "_row_num": 6
+        },
+        {
+          "choice_list_name": "region",
+          "data_value": "7",
+          "display": {
+            "title": {
+              "text": {
+                "english": "Cacheu",
+                "default": "Cacheu"
+              }
+            }
+          },
+          "_row_num": 7
+        },
+        {
+          "choice_list_name": "region",
+          "data_value": "8",
+          "display": {
+            "title": {
+              "text": {
+                "english": "Bafata",
+                "default": "Bafata"
+              }
+            }
+          },
+          "_row_num": 8
+        },
+        {
+          "choice_list_name": "region",
+          "data_value": "11",
+          "display": {
+            "title": {
+              "text": {
+                "english": "Quinara",
+                "default": "Quinara"
+              }
+            }
+          },
+          "_row_num": 9
+        },
+        {
+          "choice_list_name": "region",
+          "data_value": "12",
+          "display": {
+            "title": {
+              "text": {
+                "english": "Tombali",
+                "default": "Tombali"
+              }
+            }
+          },
+          "_row_num": 10
+        },
+        {
+          "choice_list_name": "region",
+          "data_value": "13",
+          "display": {
+            "title": {
+              "text": {
+                "english": "Bubaque",
+                "default": "Bubaque"
+              }
+            }
+          },
+          "_row_num": 11
+        },
+        {
+          "choice_list_name": "region",
+          "data_value": "14",
+          "display": {
+            "title": {
+              "text": {
+                "english": "Bolama",
+                "default": "Bolama"
+              }
+            }
+          },
+          "_row_num": 12
+        },
+        {
+          "choice_list_name": "region",
+          "data_value": "15",
+          "display": {
+            "title": {
+              "text": {
+                "english": "Sao Domingos",
+                "default": "Sao Domingos"
+              }
+            }
+          },
+          "_row_num": 13
+        },
+        {
+          "choice_list_name": "region",
+          "data_value": "16",
+          "display": {
+            "title": {
+              "text": {
+                "english": "MSF Bafata",
+                "default": "MSF Bafata"
+              }
+            }
+          },
+          "_row_num": 14
+        }
+      ],
+      "pizza": [
+        {
+          "choice_list_name": "pizza",
+          "data_value": "Bis",
+          "display": {
+            "title": {
+              "text": {
+                "english": "Bistro",
+                "default": "Bistro"
+              }
+            }
+          },
+          "_row_num": 15
+        },
+        {
+          "choice_list_name": "pizza",
+          "data_value": "Ins",
+          "display": {
+            "title": {
+              "text": {
+                "english": "Insonias",
+                "default": "Insonias"
+              }
+            }
+          },
+          "_row_num": 16
+        }
+      ]
+    },
     "table_specific_definitions": {
       "_tokens": {}
     },
     "queries": {},
-    "calculates": {},
-    "model": {},
+    "calculates": {
+      "displayTODAY": {
+        "calculation_name": "displayTODAY",
+        "calculation": "adate.display(data(\"TODAY\"))",
+        "_row_num": 2
+      },
+      "displayDOB": {
+        "calculation_name": "displayDOB",
+        "calculation": "adate.display(data(\"DOB\"))",
+        "_row_num": 3
+      },
+      "diffInDays": {
+        "calculation_name": "diffInDays",
+        "calculation": "adate.diffInDays(data(\"DOB\"),data(\"TODAY\"))",
+        "_row_num": 4
+      }
+    },
+    "model": {
+      "AGE": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "AGE"
+      },
+      "BEST": {
+        "type": "string",
+        "valuesList": "yesYES",
+        "_defn": [
+          {
+            "_row_num": 36,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "BEST"
+      },
+      "DATE1": {
+        "prompt_type_name": "adate",
+        "type": "string",
+        "elementType": "string",
+        "comment": "Save only mm.dd.yyyy with support for ?? at all positions",
+        "_row_num": 2,
+        "__rowNum__": 1,
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "DATE1"
+      },
+      "DATE2": {
+        "prompt_type_name": "adate",
+        "type": "string",
+        "elementType": "string",
+        "comment": "Save only mm.dd.yyyy with support for ?? at all positions",
+        "_row_num": 2,
+        "__rowNum__": 1,
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "DATE2"
+      },
+      "DOB": {
+        "prompt_type_name": "adate",
+        "type": "string",
+        "elementType": "string",
+        "comment": "Save only mm.dd.yyyy with support for ?? at all positions",
+        "_row_num": 2,
+        "__rowNum__": 1,
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 6,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "DOB"
+      },
+      "IMG": {
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "IMG_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "IMG_contentType"
+          }
+        },
+        "_defn": [
+          {
+            "_row_num": 49,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "IMG"
+      },
+      "NAME": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "NAME"
+      },
+      "PIZZA": {
+        "type": "string",
+        "valuesList": "pizza",
+        "_defn": [
+          {
+            "_row_num": 41,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "PIZZA"
+      },
+      "REG": {
+        "type": "string",
+        "valuesList": "region",
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 10,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "REG"
+      },
+      "REGVIS": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "REGVIS_items"
+        },
+        "valuesList": "region",
+        "_defn": [
+          {
+            "_row_num": 45,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "REGVIS"
+      },
+      "TODAY": {
+        "prompt_type_name": "adate",
+        "type": "string",
+        "elementType": "string",
+        "comment": "Save only mm.dd.yyyy with support for ?? at all positions",
+        "_row_num": 2,
+        "__rowNum__": 1,
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "TODAY"
+      }
+    },
     "section_names": [
       "initial",
       "survey"
@@ -241,8 +1348,8 @@
             "display": {
               "prompt": {
                 "text": {
-                  "english": "This is just a test",
-                  "default": "This is just a test"
+                  "english": "This is the note prompt type. It is used for writing notes.",
+                  "default": "This is the note prompt type. It is used for writing notes."
                 }
               }
             },
@@ -254,16 +1361,433 @@
             "promptIdx": 0
           },
           {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "This screen is an example of the text and integer prompt type. <br />\nText allows the user to input text. <br />\nInteger allows the user to input an integer.",
+                  "default": "This screen is an example of the text and integer prompt type. <br />\nText allows the user to input text. <br />\nInteger allows the user to input an integer."
+                }
+              }
+            },
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 1
+          },
+          {
+            "type": "text",
+            "name": "NAME",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "What is your name?",
+                  "default": "What is your name?"
+                }
+              }
+            },
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 2
+          },
+          {
+            "type": "integer",
+            "name": "AGE",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "How old are you?",
+                  "default": "How old are you?"
+                }
+              },
+              "constraint_message": {
+                "text": {
+                  "english": "Age has to between 1-100:",
+                  "default": "Age has to between 1-100:"
+                }
+              }
+            },
+            "constraint": "(data(\"AGE\")>0 && data(\"AGE\")<=100) || data(\"AGE\") == 999",
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 3
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "The assign prompt is used to assign values to variables. <br />\nHere the DOB value has been assgin NS values, since age is 999. <br />\nDOB: {{data.DOB}}",
+                  "default": "The assign prompt is used to assign values to variables. <br />\nHere the DOB value has been assgin NS values, since age is 999. <br />\nDOB: {{data.DOB}}"
+                }
+              }
+            },
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 4
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "The adate promt is a custom Bandim prompt that allows for NS values in dates. <br />\nYour age: {{data.AGE}}.",
+                  "default": "The adate promt is a custom Bandim prompt that allows for NS values in dates. <br />\nYour age: {{data.AGE}}."
+                }
+              }
+            },
+            "_row_num": 15,
+            "__rowNum__": 14,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 5
+          },
+          {
+            "type": "adate",
+            "name": "DOB",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "What day is your birthday?",
+                  "default": "What day is your birthday?"
+                }
+              }
+            },
+            "_row_num": 16,
+            "__rowNum__": 15,
+            "_token_type": "prompt",
+            "_type": "adate",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 6
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "Today: {{data.TODAY}} <br />\nToday  (converted): {{calculates.displayTODAY}}",
+                  "default": "Today: {{data.TODAY}} <br />\nToday  (converted): {{calculates.displayTODAY}}"
+                }
+              }
+            },
+            "_row_num": 20,
+            "__rowNum__": 19,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 7
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "There is a NS value in DOB: {{calculates.displayDOB}}.",
+                  "default": "There is a NS value in DOB: {{calculates.displayDOB}}."
+                }
+              }
+            },
+            "_row_num": 23,
+            "__rowNum__": 22,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 8
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "There is not a NS value in DOB: {{calculates.displayDOB}}.",
+                  "default": "There is not a NS value in DOB: {{calculates.displayDOB}}."
+                }
+              }
+            },
+            "_row_num": 25,
+            "__rowNum__": 24,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 9
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "There are {{calculates.diffInDays}} days between your birthday and today.",
+                  "default": "There are {{calculates.diffInDays}} days between your birthday and today."
+                }
+              }
+            },
+            "_row_num": 27,
+            "__rowNum__": 26,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 10
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "The small calculations under an adate prompt can be removed.",
+                  "default": "The small calculations under an adate prompt can be removed."
+                }
+              }
+            },
+            "_row_num": 30,
+            "__rowNum__": 29,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 11
+          },
+          {
+            "type": "adate",
+            "name": "DATE1",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "With calculations",
+                  "default": "With calculations"
+                }
+              }
+            },
+            "_row_num": 31,
+            "__rowNum__": 30,
+            "_token_type": "prompt",
+            "_type": "adate",
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 12
+          },
+          {
+            "type": "adate",
+            "name": "DATE2",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "Without calculations",
+                  "default": "Without calculations"
+                }
+              },
+              "adate": {
+                "helperText": false
+              }
+            },
+            "_row_num": 32,
+            "__rowNum__": 31,
+            "_token_type": "prompt",
+            "_type": "adate",
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 13
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "The selcet_one prompt is used for multiple choice questions.",
+                  "default": "The selcet_one prompt is used for multiple choice questions."
+                }
+              }
+            },
+            "_row_num": 35,
+            "__rowNum__": 34,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 14
+          },
+          {
+            "type": "select_one",
+            "values_list": "yesYES",
+            "name": "BEST",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "Is this the best test app you have ever seen?",
+                  "default": "Is this the best test app you have ever seen?"
+                }
+              }
+            },
+            "_row_num": 36,
+            "__rowNum__": 35,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 15
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "Thank you!",
+                  "default": "Thank you!"
+                }
+              }
+            },
+            "_row_num": 38,
+            "__rowNum__": 37,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 16
+          },
+          {
+            "type": "select_one_dropdown",
+            "values_list": "region",
+            "name": "REG",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "What region do you like the best?",
+                  "default": "What region do you like the best?"
+                }
+              }
+            },
+            "_row_num": 40,
+            "__rowNum__": 39,
+            "_token_type": "prompt",
+            "_type": "select_one_dropdown",
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 17
+          },
+          {
+            "type": "select_one_with_other",
+            "values_list": "pizza",
+            "name": "PIZZA",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "Where do you get the best pizza?",
+                  "default": "Where do you get the best pizza?"
+                }
+              }
+            },
+            "_row_num": 41,
+            "__rowNum__": 40,
+            "_token_type": "prompt",
+            "_type": "select_one_with_other",
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 18
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "The select_multiple prompt is used for multiple answers questions.",
+                  "default": "The select_multiple prompt is used for multiple answers questions."
+                }
+              }
+            },
+            "_row_num": 44,
+            "__rowNum__": 43,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen43",
+            "promptIdx": 19
+          },
+          {
+            "type": "select_multiple",
+            "values_list": "region",
+            "name": "REGVIS",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "Which regions have you visited?",
+                  "default": "Which regions have you visited?"
+                }
+              }
+            },
+            "_row_num": 45,
+            "__rowNum__": 44,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen43",
+            "promptIdx": 20
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "The image prompt is used to take pictures.",
+                  "default": "The image prompt is used to take pictures."
+                }
+              }
+            },
+            "_row_num": 48,
+            "__rowNum__": 47,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen47",
+            "promptIdx": 21
+          },
+          {
+            "type": "image",
+            "name": "IMG",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "Please take a photo of something.",
+                  "default": "Please take a photo of something."
+                }
+              }
+            },
+            "_row_num": 49,
+            "__rowNum__": 48,
+            "_token_type": "prompt",
+            "_type": "image",
+            "_branch_label_enclosing_screen": "survey/_screen47",
+            "promptIdx": 22
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "english": "It is <b> possible </b> to <i> costomize </i> your texts by using <font color = \"red\"> HTML </font>!",
+                  "default": "It is <b> possible </b> to <i> costomize </i> your texts by using <font color = \"red\"> HTML </font>!"
+                }
+              }
+            },
+            "_row_num": 52,
+            "__rowNum__": 51,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen51",
+            "promptIdx": 23
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 5,
-            "_branch_label_enclosing_screen": "survey/_screen5",
-            "promptIdx": 1
+            "_row_num": 54,
+            "_branch_label_enclosing_screen": "survey/_screen54",
+            "promptIdx": 24
           }
         ],
         "validation_tag_map": {
-          "finalize": []
+          "finalize": [
+            3
+          ]
         },
         "operations": [
           {
@@ -281,31 +1805,151 @@
             "operationIdx": 0
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
+            "clause": "begin screen",
             "_row_num": 5,
+            "__rowNum__": 4,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 9,
+              "__rowNum__": 8,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
           },
           {
-            "_row_num": 5,
+            "clause": "begin screen",
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 18,
+              "__rowNum__": 17,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nif (data(\"AGE\")==999) {\nactivePromptIndicies.push(4);\nassign('DOB', \"D:NS,M:NS,Y:NS\");\n}\nelse {\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 28,
+              "__rowNum__": 27,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\nassign('TODAY', adate.today());\nif (adate.hasUncertainty(data(\"DOB\"))) {\nactivePromptIndicies.push(8);\n}\nelse {\nactivePromptIndicies.push(9);\n}\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 3
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 29,
+            "__rowNum__": 28,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 33,
+              "__rowNum__": 32,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 34,
+            "__rowNum__": 33,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 42,
+              "__rowNum__": 41,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nif (data(\"BEST\")==2) {\nactivePromptIndicies.push(16);\n}\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 43,
+            "__rowNum__": 42,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 46,
+              "__rowNum__": 45,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 47,
+            "__rowNum__": 46,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 50,
+              "__rowNum__": 49,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 51,
+            "__rowNum__": 50,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 53,
+              "__rowNum__": 52,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 8
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 54,
+            "operationIdx": 9
+          },
+          {
+            "_row_num": 54,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 2
+            "operationIdx": 10
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 5,
-            "operationIdx": 3
+            "_row_num": 54,
+            "operationIdx": 11
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_contents": 2,
-          "_screen5": 2
+          "_screen5": 1,
+          "_screen10": 2,
+          "_screen19": 3,
+          "_screen29": 4,
+          "_screen34": 5,
+          "_screen43": 6,
+          "_screen47": 7,
+          "_screen51": 8,
+          "_contents": 10,
+          "_screen54": 10
         }
       },
       "initial": {
@@ -339,7 +1983,7 @@
               "title": {
                 "text": {
                   "english": "Bandim Test App",
-                  "default": "Bandim Test App"
+                  "default": "App de Teste Bandim"
                 }
               }
             },
@@ -490,6 +2134,285 @@
       }
     },
     "dataTableModel": {
+      "AGE": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "AGE",
+        "elementName": "AGE",
+        "elementSet": "data",
+        "elementPath": "AGE"
+      },
+      "BEST": {
+        "type": "string",
+        "valuesList": "yesYES",
+        "_defn": [
+          {
+            "_row_num": 36,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "BEST",
+        "elementName": "BEST",
+        "elementSet": "data",
+        "elementPath": "BEST"
+      },
+      "DATE1": {
+        "prompt_type_name": "adate",
+        "type": "string",
+        "elementType": "string",
+        "comment": "Save only mm.dd.yyyy with support for ?? at all positions",
+        "_row_num": 2,
+        "__rowNum__": 1,
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "DATE1",
+        "elementName": "DATE1",
+        "elementSet": "data",
+        "elementPath": "DATE1"
+      },
+      "DATE2": {
+        "prompt_type_name": "adate",
+        "type": "string",
+        "elementType": "string",
+        "comment": "Save only mm.dd.yyyy with support for ?? at all positions",
+        "_row_num": 2,
+        "__rowNum__": 1,
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "DATE2",
+        "elementName": "DATE2",
+        "elementSet": "data",
+        "elementPath": "DATE2"
+      },
+      "DOB": {
+        "prompt_type_name": "adate",
+        "type": "string",
+        "elementType": "string",
+        "comment": "Save only mm.dd.yyyy with support for ?? at all positions",
+        "_row_num": 2,
+        "__rowNum__": 1,
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 6,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "DOB",
+        "elementName": "DOB",
+        "elementSet": "data",
+        "elementPath": "DOB"
+      },
+      "IMG": {
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "IMG_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "IMG.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "IMG_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "IMG.contentType"
+          }
+        },
+        "_defn": [
+          {
+            "_row_num": 49,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "IMG",
+        "elementName": "IMG",
+        "elementSet": "data",
+        "elementPath": "IMG",
+        "listChildElementKeys": [
+          "IMG_contentType",
+          "IMG_uriFragment"
+        ],
+        "notUnitOfRetention": true
+      },
+      "NAME": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "NAME",
+        "elementName": "NAME",
+        "elementSet": "data",
+        "elementPath": "NAME"
+      },
+      "PIZZA": {
+        "type": "string",
+        "valuesList": "pizza",
+        "_defn": [
+          {
+            "_row_num": 41,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "PIZZA",
+        "elementName": "PIZZA",
+        "elementSet": "data",
+        "elementPath": "PIZZA"
+      },
+      "REG": {
+        "type": "string",
+        "valuesList": "region",
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 10,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "REG",
+        "elementName": "REG",
+        "elementSet": "data",
+        "elementPath": "REG"
+      },
+      "REGVIS": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "REGVIS_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "REGVIS.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "region",
+        "_defn": [
+          {
+            "_row_num": 45,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "REGVIS",
+        "elementName": "REGVIS",
+        "elementSet": "data",
+        "elementPath": "REGVIS",
+        "listChildElementKeys": [
+          "REGVIS_items"
+        ]
+      },
+      "TODAY": {
+        "prompt_type_name": "adate",
+        "type": "string",
+        "elementType": "string",
+        "comment": "Save only mm.dd.yyyy with support for ?? at all positions",
+        "_row_num": 2,
+        "__rowNum__": 1,
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": false,
+        "elementKey": "TODAY",
+        "elementName": "TODAY",
+        "elementSet": "data",
+        "elementPath": "TODAY"
+      },
+      "IMG_uriFragment": {
+        "type": "string",
+        "elementType": "rowpath",
+        "elementKey": "IMG_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "IMG.uriFragment"
+      },
+      "IMG_contentType": {
+        "type": "string",
+        "elementType": "mimeType",
+        "default": "image/*",
+        "elementKey": "IMG_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "IMG.contentType"
+      },
+      "REGVIS_items": {
+        "type": "string",
+        "elementKey": "REGVIS_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "REGVIS.items",
+        "notUnitOfRetention": true
+      },
       "_id": {
         "type": "string",
         "isNotNullable": true,
@@ -605,6 +2528,34 @@
     },
     "properties": [
       {
+        "_partition": "Column",
+        "_aspect": "BEST",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yesYES\",\"data_value\":\"1\",\"display\":{\"title\":{\"text\":{\"english\":\"Yes\",\"default\":\"Yes\"}}},\"_row_num\":2},{\"choice_list_name\":\"yesYES\",\"data_value\":\"2\",\"display\":{\"title\":{\"text\":{\"english\":\"YES!!\",\"default\":\"YES!!\"}}},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "PIZZA",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"pizza\",\"data_value\":\"Bis\",\"display\":{\"title\":{\"text\":{\"english\":\"Bistro\",\"default\":\"Bistro\"}}},\"_row_num\":15},{\"choice_list_name\":\"pizza\",\"data_value\":\"Ins\",\"display\":{\"title\":{\"text\":{\"english\":\"Insonias\",\"default\":\"Insonias\"}}},\"_row_num\":16}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "REG",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"region\",\"data_value\":\"1\",\"display\":{\"title\":{\"text\":{\"english\":\"Oio\",\"default\":\"Oio\"}}},\"_row_num\":4},{\"choice_list_name\":\"region\",\"data_value\":\"2\",\"display\":{\"title\":{\"text\":{\"english\":\"Biombo\",\"default\":\"Biombo\"}}},\"_row_num\":5},{\"choice_list_name\":\"region\",\"data_value\":\"5\",\"display\":{\"title\":{\"text\":{\"english\":\"Gabu\",\"default\":\"Gabu\"}}},\"_row_num\":6},{\"choice_list_name\":\"region\",\"data_value\":\"7\",\"display\":{\"title\":{\"text\":{\"english\":\"Cacheu\",\"default\":\"Cacheu\"}}},\"_row_num\":7},{\"choice_list_name\":\"region\",\"data_value\":\"8\",\"display\":{\"title\":{\"text\":{\"english\":\"Bafata\",\"default\":\"Bafata\"}}},\"_row_num\":8},{\"choice_list_name\":\"region\",\"data_value\":\"11\",\"display\":{\"title\":{\"text\":{\"english\":\"Quinara\",\"default\":\"Quinara\"}}},\"_row_num\":9},{\"choice_list_name\":\"region\",\"data_value\":\"12\",\"display\":{\"title\":{\"text\":{\"english\":\"Tombali\",\"default\":\"Tombali\"}}},\"_row_num\":10},{\"choice_list_name\":\"region\",\"data_value\":\"13\",\"display\":{\"title\":{\"text\":{\"english\":\"Bubaque\",\"default\":\"Bubaque\"}}},\"_row_num\":11},{\"choice_list_name\":\"region\",\"data_value\":\"14\",\"display\":{\"title\":{\"text\":{\"english\":\"Bolama\",\"default\":\"Bolama\"}}},\"_row_num\":12},{\"choice_list_name\":\"region\",\"data_value\":\"15\",\"display\":{\"title\":{\"text\":{\"english\":\"Sao Domingos\",\"default\":\"Sao Domingos\"}}},\"_row_num\":13},{\"choice_list_name\":\"region\",\"data_value\":\"16\",\"display\":{\"title\":{\"text\":{\"english\":\"MSF Bafata\",\"default\":\"MSF Bafata\"}}},\"_row_num\":14}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "REGVIS",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"region\",\"data_value\":\"1\",\"display\":{\"title\":{\"text\":{\"english\":\"Oio\",\"default\":\"Oio\"}}},\"_row_num\":4},{\"choice_list_name\":\"region\",\"data_value\":\"2\",\"display\":{\"title\":{\"text\":{\"english\":\"Biombo\",\"default\":\"Biombo\"}}},\"_row_num\":5},{\"choice_list_name\":\"region\",\"data_value\":\"5\",\"display\":{\"title\":{\"text\":{\"english\":\"Gabu\",\"default\":\"Gabu\"}}},\"_row_num\":6},{\"choice_list_name\":\"region\",\"data_value\":\"7\",\"display\":{\"title\":{\"text\":{\"english\":\"Cacheu\",\"default\":\"Cacheu\"}}},\"_row_num\":7},{\"choice_list_name\":\"region\",\"data_value\":\"8\",\"display\":{\"title\":{\"text\":{\"english\":\"Bafata\",\"default\":\"Bafata\"}}},\"_row_num\":8},{\"choice_list_name\":\"region\",\"data_value\":\"11\",\"display\":{\"title\":{\"text\":{\"english\":\"Quinara\",\"default\":\"Quinara\"}}},\"_row_num\":9},{\"choice_list_name\":\"region\",\"data_value\":\"12\",\"display\":{\"title\":{\"text\":{\"english\":\"Tombali\",\"default\":\"Tombali\"}}},\"_row_num\":10},{\"choice_list_name\":\"region\",\"data_value\":\"13\",\"display\":{\"title\":{\"text\":{\"english\":\"Bubaque\",\"default\":\"Bubaque\"}}},\"_row_num\":11},{\"choice_list_name\":\"region\",\"data_value\":\"14\",\"display\":{\"title\":{\"text\":{\"english\":\"Bolama\",\"default\":\"Bolama\"}}},\"_row_num\":12},{\"choice_list_name\":\"region\",\"data_value\":\"15\",\"display\":{\"title\":{\"text\":{\"english\":\"Sao Domingos\",\"default\":\"Sao Domingos\"}}},\"_row_num\":13},{\"choice_list_name\":\"region\",\"data_value\":\"16\",\"display\":{\"title\":{\"text\":{\"english\":\"MSF Bafata\",\"default\":\"MSF Bafata\"}}},\"_row_num\":14}]"
+      },
+      {
         "_partition": "FormType",
         "_aspect": "default",
         "_key": "FormType.formType",
@@ -630,7 +2581,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"english\":\"Bandim Test App\",\"default\":\"Bandim Test App\"}}"
+        "_value": "{\"text\":{\"english\":\"Bandim Test App\",\"default\":\"App de Teste Bandim\"}}"
       }
     ]
   }

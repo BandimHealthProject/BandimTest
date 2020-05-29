@@ -5,4 +5,5 @@ app/config/assets/csv/*
 tempZipDir
 .idea/*
 app/output/*
+~*.xlsx*
 
