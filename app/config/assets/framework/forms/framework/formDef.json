@@ -71,7 +71,7 @@
           "title": {
             "text": {
               "english": "Bandim Test App",
-              "default": "Bandim Test App"
+              "default": "App de Teste Bandim"
             }
           }
         },
@@ -718,7 +718,7 @@
             "title": {
               "text": {
                 "english": "Bandim Test App",
-                "default": "Bandim Test App"
+                "default": "App de Teste Bandim"
               }
             }
           },
